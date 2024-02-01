@@ -12,8 +12,31 @@ yellowpDoc = nlp(yellowp)
 
 matcher = Matcher(nlp.vocab)
 
+pattern = [{"TEXT": "wallpaper"}]
+matcher.add("sun_pattern", [pattern])
 
- 
+matches = matcher(yellowpDoc)
+
+# Extract matched spans from the text
+matched_phrases = [yellowpDoc[start:end].text for match_id, start, end in matches]
+
+# iterate through the sentences and check if start and end of phrase in in sentence
+matched_phrase_sentence = []
+
+for match_id, start, end in matches:
+    matched_phrase = yellowpDoc[start:end].text
+    for sent in yellowpDoc.sents:
+        if start >= sent.start and end <= sent.end:
+            matched_sentence = sent.text
+            matched_phrase_sentence.append({"phrase": matched_phrase, "sentence": matched_sentence})
+
+# Print the result
+for match in matched_phrase_sentence:
+    print("Matched phrase:", match["phrase"])
+    print("Sentence:", match["sentence"])
+    print()
+
+
 
 
 '''
