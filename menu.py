@@ -9,7 +9,7 @@ while run:
                   "\n1. Search Metamorphosis with your chosen search phrase."
                   "\n2. Search The Yellow Wallpaper with your chosen search phrase."
                   "\n3. Search Metamorphosis or The Yellow Wallpaper with your chosen search phrase."
-                  "\n4. Ask LitSearch2000 about the most common characters in the books."
+                  "\n4. Get information about the most common characters in the books and the descriptors associated with the character."
                   "\n5. Ask LitSearch2000 about the most common descriptive words in the books."
                   "\nQ. Shut down LitSearch2000"
                    "\n-> ").strip()
