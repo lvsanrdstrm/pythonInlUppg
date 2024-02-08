@@ -7,7 +7,7 @@
 - Skriv en detaljerad beskrivning av din applikation.
 - Använd Git.
 
-# Jag har gjort ett random sökprogram där man kan utföra olika funktioner på två olika böcker
+# EmotionSearch2000
 Ville skriva ett program där användaren kan välja mellan olika funktioner för att undersöka böckerna. Jag har i nuläget tre fungerande funktioner med lite olika syfte. En låter användaren välja bok och söka på valfri ord/fras och får sökträffarna i meningar. Den andra funktionen kan användaren välja ord/fras som Litsearch2000 sedan gör sentiment/emotional tone analysis på sökträffarna och jämför resultatet. Den tredje så väljer användaren bok och får sedan tillbaka vanligaste karaktären och kan välja om den vill generera meningar där karaktären förekommer och få en emotional tone-analys. Jobbar på en fjärde funktion där ja vill ta fram most frequent adjektiv.
 
 

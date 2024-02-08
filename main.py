@@ -27,6 +27,9 @@ class SentimentSent:
         self.sentence = sentence
         self.polarity = polarity
 
+
+
+            
 def add_user_input():
     user_input = input("Enter a phrase to use as a pattern: ")
     searchWordDoc = nlp(user_input)
@@ -75,7 +78,7 @@ def search_any_book():
         print("Book:", book)
         print("Matched phrase:", match["phrase"])
         print("Sentence:", match["sentence"])
-        print()
+        print("----------------------")
    
 
     matcher.remove("user_pattern")
@@ -84,11 +87,13 @@ def search_any_book():
         now_what = input("Press B when/if you want to return to the menu. Press A if you want to start over.").lower()
         if now_what == "b":
             print("Okay. Bye!")
+            print("----------------------")
             return
         elif now_what == "a":
             search_any_book()
         else:
             print("Invalid entry. Y for Yes or N for No.")
+            print("----------------------")
 
 def sentiment_search():
     
@@ -147,7 +152,7 @@ def sentiment_search():
             avg_polarity = "Very positive emotional tone! :D"  
         print("----------------------")
         print("Book:", doc)
-        print("Average Polarity:", avg_polarity)
+        print("Average emotional tone in sentences with your search word:", avg_polarity)
         
 
     max_polarity_doc = max(compare_polarities, key=compare_polarities.get)
@@ -155,6 +160,7 @@ def sentiment_search():
     
     print("----------------------")
     print(f"Based on the sentences with your search word, {max_polarity_doc} has a more positive emotional tone than {min_polarity_doc}.")
+    print("----------------------")
 
     matcher.remove("user_pattern")    
     
@@ -166,14 +172,28 @@ def sentiment_search():
                 print("Document:", match.doc)
                 print("Matched phrase:", match.phrase)
                 print("Sentence:", match.sentence)
+                print("Emotional tone for the sentence:", match.polarity)
                 print("----------------------")
             break
         elif print_sentences == "n":
-            print("You certainly don't have to. Bye!")   
+            print("You certainly don't have to. Bye!")
+            print("----------------------") 
             break
         else:
             print("Invalid entry. Y for Yes or N for No.")
-  
+            print("----------------------")
+    
+    while True:
+        now_what = input("Press B when/if you want to return to the menu. Press A if you want to start over. A/B:  ").lower()
+        if now_what == "b":
+            print("Okay. Bye!")
+            print("----------------------")
+            return
+        elif now_what == "a":
+            sentiment_search()
+        else:
+            print("Invalid entry. Y for Yes or N for No.")
+            print("----------------------")
 
 def common_characters():
     doc_to_search = book_to_search()
@@ -233,17 +253,26 @@ def common_characters():
                     print()
             break
         elif print_sentences == "n":
-            print("You certainly don't have to. Bye!")   
+            print("You certainly don't have to.")   
             break
         else:
             print("Invalid entry. Y for Yes or N for No.")
 
-
-
+    while True:
+        now_what = input("Press B when/if you want to return to the menu. Press A if you want to start over.").lower()
+        if now_what == "b":
+            print("Okay. Bye!")
+            print("----------------------")
+            return
+        elif now_what == "a":
+            common_characters()
+        else:
+            print("Invalid entry. Y for Yes or N for No.")
+            print("----------------------")       
    
 
 
-def common_descriptions():
+def common_descriptors():
     doc_to_search = book_to_search()
 
     '''for token in doc_to_search:
@@ -251,8 +280,20 @@ def common_descriptions():
             print(token.text, '\t', token.pos_)   '''   
 
     descriptor = [token for token in doc_to_search if token.pos_ == "ADJ"]
+    print(descriptor)
      
      #denna vill jag göra en frequent-analys på
+    while True:
+        now_what = input("Press B when/if you want to return to the menu. Press A if you want to start over.").lower()
+        if now_what == "b":
+            print("Okay. Bye!")
+            print("----------------------")
+            return
+        elif now_what == "a":
+            common_descriptors()
+        else:
+            print("Invalid entry. Y for Yes or N for No.")
+            print("----------------------")
 
     
     
