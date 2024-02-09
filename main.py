@@ -3,6 +3,7 @@ from spacy.matcher import Matcher
 from spacytextblob.spacytextblob import SpacyTextBlob
 
 
+
 nlp = spacy.load('en_core_web_lg')
 nlp.add_pipe('spacytextblob')
 
@@ -67,6 +68,22 @@ def end_of_function(current_function_name):
             print("Invalid entry. Y for Yes or N for No.")
             print("----------------------")    
 
+    return doc_to_search  
+
+def end_of_function(current_function_name):
+    while True:
+        now_what = input("Press B when/if you want to return to the menu. Press A if you want to start over.").lower()
+        if now_what == "b":
+            print("Okay. Bye!")
+            print("----------------------")
+            break
+        elif now_what == "a":
+            current_function_name()
+            break
+        else:
+            print("Invalid entry. Y for Yes or N for No.")
+            print("----------------------")    
+
    
 
 def search_any_book():
@@ -103,7 +120,22 @@ def search_any_book():
             print("----------------------")
     else:
         print("No matched phrases found.")
+    print("----------------------")
+    print("Book:", book)
+    print("----------------------")
+
+    if matched_phrase_sentence:
+        print("Matched phrase:", matched_phrase_sentence[0]["phrase"])
         print("----------------------")
+
+        for match in matched_phrase_sentence:
+            print("Sentence:", match["sentence"])
+            print("----------------------")
+    else:
+        print("No matched phrases found.")
+        print("----------------------")
+        
+   
         
    
     matcher.remove("user_pattern")
@@ -154,6 +186,9 @@ def sentiment_search():
     metam_matched_phrase_sentence = sentiment_process_document(metamDoc, "Metamorphosis")
 
     yellowp_matched_phrase_sentence = sentiment_process_document(yellowpDoc, "The Yellow Wallpaper")
+    metam_matched_phrase_sentence = sentiment_process_document(metamDoc, "Metamorphosis")
+
+    yellowp_matched_phrase_sentence = sentiment_process_document(yellowpDoc, "The Yellow Wallpaper")
     
     all_matches = metam_matched_phrase_sentence + yellowp_matched_phrase_sentence
     
@@ -171,6 +206,7 @@ def sentiment_search():
         avg_polarity = sum(polarities) / len(polarities)
         compare_polarities[doc] = avg_polarity
         avg_polarity = translate_polarity(avg_polarity) 
+        avg_polarity = translate_polarity(avg_polarity) 
         print("----------------------")
         print("Book:", doc)
         print("Average emotional tone in sentences with your search word:", avg_polarity)
@@ -181,15 +217,19 @@ def sentiment_search():
     
     print("----------------------")
     print(f"Based on the sentences with your search word, {min_polarity_doc} has a more negative emotional tone than {max_polarity_doc}.")
+    print(f"Based on the sentences with your search word, {min_polarity_doc} has a more negative emotional tone than {max_polarity_doc}.")
     print("----------------------")
 
     matcher.remove("user_pattern")    
     
         
+        
     while True:
+        print_sentences = input("Would you like to see the sentences the emotional tone analysis was based on? Y/N: ").lower()
         print_sentences = input("Would you like to see the sentences the emotional tone analysis was based on? Y/N: ").lower()
         if print_sentences == "y":
             for match in all_matches:
+                match.polarity = translate_polarity(match.polarity)
                 match.polarity = translate_polarity(match.polarity)
                 print("Document:", match.doc)
                 print("Matched phrase:", match.phrase)
