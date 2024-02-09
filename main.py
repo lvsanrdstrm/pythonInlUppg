@@ -29,16 +29,22 @@ class SentimentSent:
         self.polarity = polarity
         self.mostFreqChar = mostFreqChar
 
-
+    # här har jag brutit ur kod som skapar ett pattern till matchern från add_user_input för att jag
+        #ville återanvända matcher-kod till character-funktionen.
 def create_pattern(search_word):
+    # skapar variabeln searchworddoc och assignar funktionsinputen i form av nlp-doc
     searchWordDoc = nlp(search_word)
     
+    #skapar variabeln patter och assignar den de individuella orden i searchworddoc, alltå antingen användarens input eller vanligaste karaktären
     pattern = [{"LOWER": token.lower_} for token in searchWordDoc]
+    # här läggs the pattern till matchern
     matcher.add("user_pattern", [pattern])
 
-            
+    # funktion jag kallar på när användaren väljer eget sökord     
 def add_user_input():
+    # skapar variabeln user_input som jag assignar användarens svar på prompten
     user_input = input("Enter a word to use as a pattern: ")
+    # kallar på funktionen create_pattern och kör user input som parameter så att jag får ett pattern in i matchern med sökordet
     create_pattern(user_input)
 
 def book_to_search():
