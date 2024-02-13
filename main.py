@@ -379,7 +379,7 @@ def common_characters():
     while end_of_function(common_characters):
         break      
    
-
+# HÄR EFTER ÄR EN FUNKTION JAG JOBBAR PÅ FÖR KUL SOM EJ VAR KLAR TILL INLÄMNING OCH EJ ÄR EN DEL AV MIN UPPGIFT
 # funktionen jag har börjat skriva som ska hantera emotional analys baserat på adjektiv
 def common_descriptors():
     # kallar på sökbokväljarfunktionen
@@ -406,10 +406,12 @@ def common_descriptors():
     sorted_descriptorFreq = dict(sorted(descriptorFreq.items(), key=lambda item: item[1], reverse=True))
 
     # här tar jag fram de 10 keysen me högst value med en slice på en sorterade dictionaryn i listform
-    first_10_elements = {key: sorted_descriptorFreq[key] for key in list(sorted_descriptorFreq)[:10]}
+    first_10_elements = str({key: sorted_descriptorFreq[key] for key in list(sorted_descriptorFreq)[:10]})
+    first_10_elements = first_10_elements.replace("'", "")
+    first_10_elements = first_10_elements.strip("{}")
 
     print("----------------------")
-    print(f"The ten most frequent descriptors in {book} is {first_10_elements}")
+    print(f"The ten most frequent descriptors and ther number of occurences in {book} is {first_10_elements}")
     print("----------------------")
        
     
