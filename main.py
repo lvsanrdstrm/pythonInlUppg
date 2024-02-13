@@ -384,16 +384,53 @@ def common_characters():
 def common_descriptors():
     # kallar på sökbokväljarfunktionen
     doc_to_search = book_to_search()
+
+     # assignar book ett värde baserat på valt dokument
+    if doc_to_search == metamDoc:
+        book = "Metamorphosis"
+    elif doc_to_search == yellowpDoc:
+        book = "The Yellow Wallpaper"  
    
     # list comprehension som itererar ut alla ord som är adjektiv och sparar i listan descriptor
-    descriptor = [token for token in doc_to_search if token.pos_ == "ADJ"]
-    print(descriptor)
-     
+    descriptors = [token.text for token in doc_to_search if token.pos_ == "ADJ"]
+    
+
+    descriptorFreq = {}
+    for d in descriptors:
+        if d in descriptorFreq.keys():
+            descriptorFreq[d] += 1
+        else:
+            descriptorFreq[d] = 1 
+
+    # istället för att köra max och bara ta fram ett värde sorterar jag för att kunna ta ut flera
+    sorted_descriptorFreq = dict(sorted(descriptorFreq.items(), key=lambda item: item[1], reverse=True))
+
+    # här tar jag fram de 10 keysen me högst value med en slice på en sorterade dictionaryn i listform
+    first_10_elements = {key: sorted_descriptorFreq[key] for key in list(sorted_descriptorFreq)[:10]}
+
+    print("----------------------")
+    print(f"The ten most frequent descriptors in {book} is {first_10_elements}")
+    print("----------------------")
+       
+    
+    
+
      #denna vill jag göra en frequent-analys på
     while end_of_function(common_descriptors):
         break
     
-    
+
+
+'''DESCRIPTORKOD
+maxFreq = max(descriptorFreq.values())
+    mostFreqDescr = str([key for key, value in descriptorFreq.items() if value == maxFreq])
+    mostFreqDescr = mostFreqDescr.strip("[]'")
+
+       
+    print("----------------------")
+    print(f"The most frequent character in {book} is {mostFreqDescr}")
+    print("----------------------")'''
+
 '''originalfunktionen där både karaktär och descriptor är med. gör om den så jag håller isär karaktär och descriptor
 def common_characters():
     doc_to_search = book_to_search()
